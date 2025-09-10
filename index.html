@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Argent Motorcycles — Heritage Reimagined</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#05060a; 
+    --card:#0f1720; 
+    --muted:#9aa9b8; 
+    --accent1:#06d6a0; 
+    --accent2:#ef476f; 
+    --white:#eef6ff;
+  }
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;margin:0;font-family:Poppins,system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+    color:var(--white);
+    background:var(--bg);
+    background:linear-gradient(180deg,#05060a 0%, #07090f 100%);
+    -webkit-font-smoothing:antialiased;scroll-behavior:smooth
+  }
+  a{color:inherit;text-decoration:none}
+  header{position:fixed;left:0;right:0;top:0;height:72px;display:flex;align-items:center;z-index:60;
+         background:linear-gradient(180deg, rgba(1,2,5,.55), rgba(1,2,5,.25));
+         backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.03);
+         animation:fadeDown 1s ease forwards}
+  @keyframes fadeDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;width:100%}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.6px;cursor:pointer;transition:transform .3s}
+  .brand:hover{transform:scale(1.05)}
+  .brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));
+               display:grid;place-items:center;font-family:Playfair Display,serif;font-weight:700;color:#fff}
+  nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+  nav a{opacity:.9;padding:6px 10px;border-radius:8px;font-weight:600;position:relative}
+  nav a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;
+               background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width .3s}
+  nav a:hover::after{width:100%}
+  .cta{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#06101a;padding:8px 14px;
+       border-radius:10px;font-weight:800;box-shadow:0 8px 30px #06d6a022;transition:transform .3s}
+  .cta:hover{transform:translateY(-2px)}
+  /* hero */
+  .hero{height:100vh;display:grid;grid-template-columns:1fr 460px;align-items:center;padding:120px 20px 60px;gap:40px}
+  .hero-left{max-width:760px}
+  .kicker{color:var(--muted);text-transform:uppercase;font-weight:700;letter-spacing:.26em;font-size:12px;margin-bottom:18px}
+  h1{font-family:Playfair Display,serif;font-size:clamp(36px,6vw,64px);line-height:1.02;margin:0 0 12px;
+     background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;color:transparent}
+  .lead{color:var(--muted);font-size:18px;margin-bottom:22px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:700;transition:transform .25s, box-shadow .25s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 4px 18px #0006}
+  .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#06101a}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--white)}
+  /* hero right card */
+  .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);padding:18px;border-radius:16px;
+             border:1px solid rgba(255,255,255,.04);box-shadow:0 10px 30px #0008}
+  .model-image{width:420px;height:300px;border-radius:12px;overflow:hidden;background:#000}
+  .model-image img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.03);transition:transform 1.2s ease}
+  .model-image:hover img{transform:scale(1.1)}
+  .model-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+  .price{font-weight:800;font-size:20px;color:var(--accent1)}
+  /* sections */
+  section{max-width:1200px;margin:0 auto;padding:70px 20px}
+  section h2{font-family:Playfair Display,serif;font-size:32px;margin-bottom:10px;
+             background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;color:transparent}
+  .grid{display:grid;gap:18px}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .feature{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.03);transition:transform .3s}
+  .feature:hover{transform:translateY(-6px)}
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .gallery .big{grid-column:span 2; height:420px;border-radius:14px;overflow:hidden;cursor:pointer}
+  .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .gallery div:hover img{transform:scale(1.08)}
+  /* models list */
+  .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.03);
+        display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 12px 26px #0007}
+  .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+  .specs{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+  /* modal video */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:80}
+  .modal.open{display:flex;animation:fadeIn .3s ease}
+  .modal .inner{width:min(900px,94vw);background:#02030a;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.04);
+                animation:slideUp .4s ease}
+  /* footer */
+  footer{padding:36px 20px;text-align:center;color:var(--muted)} 
+  /* responsive */
+  @media (max-width:980px){.hero{grid-template-columns:1fr; padding-top:100px} .hero-right{order:2} nav{display:none}}
+  @media (max-width:640px){.gallery{grid-template-columns:1fr} .hero{padding-top:80px}}
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:all .8s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  /* section bg colors */
+  #specs{background:#0b0f16}
+  #gallery{background:#0d111a}
+  #models{background:#080d14}
+  #shop{background:#060a12}
+  #contact{background:#0c1018}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div style="font-size:13px;opacity:.9">Argent</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:-4px">Motorcycles</div>
+      </div>
+    </div>
+    <nav aria-label="Main navigation">
+      <a href="#models">Models</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#specs">Specs</a>
+      <a href="#contact">Contact</a>
+      <a class="cta" href="#shop">Shop</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero reveal" id="home">
+  <div class="hero-left">
+    <div class="kicker">Since 1947</div>
+    <h1>Heritage Reimagined</h1>
+    <p class="lead">Argent Motorcycles merge vintage soul with modern performance. Designed in Milan, built for the world.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary">Buy Now</button>
+      <button class="btn btn-ghost" onclick="openModal('filmModal')">Watch Film</button>
+    </div>
+  </div>
+  <aside class="hero-right">
+    <div class="hero-card">
+      <div class="model-image"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=1600" alt="Argent CR-72 cafe racer motorcycle"></div>
+      <div class="model-meta">
+        <div><strong>Argent CR-72</strong><br><span class="muted">Café Racer</span></div>
+        <div class="price">$12,500</div>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<!-- FEATURES -->
+<section id="specs" class="reveal">
+  <h2>Why Argent</h2>
+  <div class="grid cols-3">
+    <article class="feature reveal"><h3>Crafted Heritage</h3><p class="muted">Drawing on 75 years of design legacy, every Argent motorcycle reflects the spirit of the golden era.</p></article>
+    <article class="feature reveal"><h3>Modern Engineering</h3><p class="muted">State-of-the-art engines and lightweight frames deliver exceptional performance and reliability.</p></article>
+    <article class="feature reveal"><h3>Timeless Aesthetics</h3><p class="muted">Classic silhouettes, handcrafted details, and a palette of bold finishes make each ride unforgettable.</p></article>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="reveal">
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <div class="big reveal"><img src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&q=80&w=1600" alt="Vintage motorcycle ride"></div>
+    <div class="reveal"><img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&q=80&w=800" alt="Motorbike on open road"></div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section id="models" class="reveal">
+  <h2>Models</h2>
+  <div class="models">
+    <div class="card reveal">
+      <img src="https://i.pinimg.com/1200x/ae/f7/c2/aef7c22a4b2cd416a12d58e634eb2eef.jpg" alt="CR-72 cafe racer">
+      <div><strong>CR-72</strong> <span class="muted">Café Racer</span></div>
+      <div class="specs"><span>750cc</span><span>95HP</span><span>6-Speed</span></div>
+      <div class="price">$12,500</div>
+    </div>
+    <div class="card reveal">
+      <img src="https://i.pinimg.com/1200x/7d/43/71/7d437157228f19b9a7d92c2d43925691.jpg" alt="ST-54 scrambler">
+      <div><strong>ST-54</strong> <span class="muted">Scrambler</span></div>
+      <div class="specs"><span>650cc</span><span>80HP</span><span>ABS</span></div>
+      <div class="price">$10,900</div>
+    </div>
+    <div class="card reveal">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6Q13-2bZa2H4K_YnV2vEJDsxp0AhOIRhJXw&s" alt="GT-21 grand tourer">
+      <div><strong>GT-21</strong> <span class="muted">Grand Tourer</span></div>
+      <div class="specs"><span>1200cc</span><span>150HP</span><span>Heated Seats</span></div>
+      <div><span class="price">$17,800</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="reveal">
+  <h2>Shop</h2>
+  <div class="grid cols-3">
+    <div class="card reveal">
+      <img src="https://i.pinimg.com/736x/e7/3d/b7/e73db72e2d8c865e23ab0d768c31aaec.jpg" alt="Rider Jacket">
+      <div><strong>Rider Jacket</strong></div>
+      <div class="price">$450</div>
+      <button class="btn btn-primary" onclick="addToCart('Rider Jacket',$450)">Add to Cart</button>
+    </div>
+    <div class="card reveal">
+      <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&q=80&w=800" alt="Heritage Helmet">
+      <div><strong>Heritage Helmet</strong></div>
+      <div class="price">$280</div>
+      <button class="btn btn-primary" onclick="addToCart('Heritage Helmet',$280)">Add to Cart</button>
+    </div>
+    <div class="card reveal">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-tHY8pBTapeAalaRbA7LayPy1sufLPd6q8A&s" alt="Leather Gloves">
+      <div><strong>Leather Gloves</strong></div>
+      <div class="price">$120</div>
+      <button class="btn btn-primary" onclick="addToCart('Leather Gloves',$120)">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <h2>Contact</h2>
+  <p class="muted">Milan HQ — Via della Motocicletta, 10100 Milano, Italy<br>Email: info@argentmoto.com</p>
+</section>
+
+<footer>
+  <div>&copy; 2025 Argent Motorcycles. All rights reserved.</div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div id="filmModal" class="modal" role="dialog" aria-modal="true" aria-label="Promotional film">
+  <div class="inner">
+    <iframe width="100%" height="480" src="https://www.youtube.com/embed/aqz-KE-bpKQ" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+function openModal(id){document.getElementById(id).classList.add('open')}
+window.addEventListener('click',e=>{
+  document.querySelectorAll('.modal.open').forEach(m=>{
+    if(!m.querySelector('.inner').contains(e.target)) m.classList.remove('open')
+  })
+})
+function addToCart(item,price){alert(item+" added to cart.")}
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}
+  })
+},{threshold:0.1});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
